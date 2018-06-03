@@ -20,6 +20,8 @@ Please see [tests](./test/test.js) for more insights.
 
 # browserify
 
+http://browserify.org/
+
 ````
 npm install -g browserify
 ````
