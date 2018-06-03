@@ -1,5 +1,7 @@
 [![NPM](https://nodei.co/npm/damerau-levenshtein.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/damerau-levenshtein/)
 
+https://github.com/pulipulichen/node-damerau-levenshtein
+
 I use algorithm kindly provided by TheSpanishInquisition here: <http://jsperf.com/damerau-levenshtein-distance>.
 
 All credits goes there. I have only packed it into Node module.
