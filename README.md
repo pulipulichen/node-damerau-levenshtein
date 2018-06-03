@@ -36,4 +36,5 @@ https://pulipulichen.github.io/node-damerau-levenshtein/node-damerau-levenshtein
 
 ```` javascript
 console.log(levenshtien("國軍程式不敵iPhone 禁止入營", "iPhone鎖功能APP早出現 科技界不解：為什麼國軍做不到？"));
+// {steps: 29, relative: 0.9354838709677419, similarity: 0.06451612903225812}
 ````
