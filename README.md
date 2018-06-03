@@ -20,7 +20,7 @@ Please see [tests](./test/test.js) for more insights.
 
 ----------
 
-# browserify
+# Browserify
 
 http://browserify.org/
 
