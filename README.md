@@ -15,3 +15,15 @@ It provides a function that takes two string arguments and returns a hash like t
 ````
 
 Please see [tests](./test/test.js) for more insights.
+
+----------
+
+# browserify
+
+````
+npm install -g browserify
+````
+
+````
+browserify browserify.js -o node-damerau-levenshtein.js
+````

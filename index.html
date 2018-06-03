@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>node-damerau-levenshtein test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script src="node-damerau-levenshtein.js"></script>
+        <script>
+            //var levenshtien = require("index");
+            console.log(levenshtien("test", "test"));
+            console.log(levenshtien("test", "tests"));
+            console.log(levenshtien("test", "stest"));
+            console.log(levenshtien("test", "mytest"));
+            console.log(levenshtien("test", "mycrazytest"));
+            console.log(levenshtien("test", "mytestiscrazy"));
+            console.log(levenshtien("test", "teest"));
+            console.log(levenshtien("test", "teeest"));
+            console.log(levenshtien("test", "tst"));
+            console.log(levenshtien("test", "tset"));
+            console.log(levenshtien("test", "tsets"));
+        </script>
+    </body>
+</html>

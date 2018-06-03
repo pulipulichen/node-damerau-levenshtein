@@ -1,0 +1,1 @@
+levenshtien = require("./index");
