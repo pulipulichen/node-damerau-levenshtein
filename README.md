@@ -29,3 +29,5 @@ npm install -g browserify
 ````
 browserify browserify.js -o node-damerau-levenshtein.js
 ````
+
+https://pulipulichen.github.io/node-damerau-levenshtein/node-damerau-levenshtein.js
