@@ -10,35 +10,38 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
     </head>
     <body>
+        
         <div class="ui segment">
             <h1 class="ui header">
                 node-damerau-levenshtein demo
             </h1>
+            
+            <!--
             <div id="app" class="ui form">
                 <div class="field">
-            <label>Example</label>
-            <select class="ui fluid dropdown" v-model="example" v-on:change="parse_example">
-                <option value="國軍程式不敵iPhone 禁止入營 / 國軍鎖不住iPhone照相傳輸功能？科技界不解">國軍程式不敵iPhone 禁止入營 / 國軍鎖不住iPhone照相傳輸功能？科技界不解</option>
-                <option value="國軍程式不敵iPhone 禁止入營 / iPhone鎖功能APP早出現 科技界不解：為什麼國軍做不到？">國軍程式不敵iPhone 禁止入營 / iPhone鎖功能APP早出現 科技界不解：為什麼國軍做不到？</option>
-                <option value="test / test">test / test</option>
-                <option value="test / tests">test / tests</option>
-                <option value="test / mytest">test / mytest</option>
-                <option value="test / mycrazytest">test / mycrazytest</option>
-                <option value="test / mytestiscrazy">test / mytestiscrazy</option>
-                <option value="test / teest">test / teest</option>
-                <option value="test / teeest">test / teeest</option>
-                <option value="test / tst">test / tst</option>
-                <option value="test / tset">test / tset</option>
-                <option value="test / tsets">test / tsets</option>
-                <option value="test / tsset">test / tsset</option>
-                <option value="banana / banaan">banana / banaan</option>
-                <option value="banana / nabana">banana / nabana</option>
-                <option value="banana / nabana">banana / abnaan</option>
-                <option value=" / "> / </option>
-                <option value="test / ">test / </option>
-                <option value=" / test"> / test</option>
-            </select>
-                      </div>
+                    <label>Example</label>
+                    <select class="ui fluid dropdown" v-model="example" v-on:change="parse_example">
+                        <option value="國軍程式不敵iPhone 禁止入營 / 國軍鎖不住iPhone照相傳輸功能？科技界不解">國軍程式不敵iPhone 禁止入營 / 國軍鎖不住iPhone照相傳輸功能？科技界不解</option>
+                        <option value="國軍程式不敵iPhone 禁止入營 / iPhone鎖功能APP早出現 科技界不解：為什麼國軍做不到？">國軍程式不敵iPhone 禁止入營 / iPhone鎖功能APP早出現 科技界不解：為什麼國軍做不到？</option>
+                        <option value="test / test">test / test</option>
+                        <option value="test / tests">test / tests</option>
+                        <option value="test / mytest">test / mytest</option>
+                        <option value="test / mycrazytest">test / mycrazytest</option>
+                        <option value="test / mytestiscrazy">test / mytestiscrazy</option>
+                        <option value="test / teest">test / teest</option>
+                        <option value="test / teeest">test / teeest</option>
+                        <option value="test / tst">test / tst</option>
+                        <option value="test / tset">test / tset</option>
+                        <option value="test / tsets">test / tsets</option>
+                        <option value="test / tsset">test / tsset</option>
+                        <option value="banana / banaan">banana / banaan</option>
+                        <option value="banana / nabana">banana / nabana</option>
+                        <option value="banana / nabana">banana / abnaan</option>
+                        <option value=" / "> / </option>
+                        <option value="test / ">test / </option>
+                        <option value=" / test"> / test</option>
+                    </select>
+                </div>
                 <div class="ui two column grid container">
                     <div class="column">
                         <textarea class="text1" v-model="text1" v-on:change="levenshtien"></textarea>
@@ -74,10 +77,13 @@
                     </tbody>
                 </table>
             </div>
+            -->
+            <div id="my" class="ui unstackable  table"></div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
         <script src="node-damerau-levenshtein.js"></script>
         <script>
+            /*
 var app_data = {
     el: '#app',
     data: {
@@ -105,8 +111,11 @@ var app_data = {
         }
     }
 };
+    
 var app = new Vue(app_data)
 app_data.methods.levenshtien();
+    */
+/*
 //var levenshtien = require("index");
 console.log(levenshtien("AABBCCAAABBC", "BBAACCCCAABB"));
 console.log(levenshtien("國軍程式不敵iPhone 禁止入營", "國軍鎖不住iPhone照相傳輸功能？科技界不解"));
@@ -122,6 +131,123 @@ console.log(levenshtien("test", "teeest"));
 console.log(levenshtien("test", "tst"));
 console.log(levenshtien("test", "tset"));
 console.log(levenshtien("test", "tsets"));
+*/
         </script>
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.5.0/js/jquery.jexcel.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.5.0/css/jquery.jexcel.min.css" type="text/css" />
+
+        
+
+        <script>
+
+var _timer;
+var _change = function (_callback) {
+    clearTimeout(_timer);
+    _timer = setTimeout(function () {
+        //var _data = [["AAA", "BBB", 1, 2, 3]];
+        var _data = $("#my").jexcel("getData", false);
+        //console.log(_data);
+        for (var _i = 0; _i < _data.length; _i++) {
+            var _result = levenshtien(_data[_i][0], _data[_i][1]);
+            //console.log(_result);
+            //continue;
+            _data[_i][2] = _result.steps;
+            _data[_i][3] = _result.relative;
+            _data[_i][4] = _result.similarity;
+            
+            //$("#my").jexcel("setValue", "C" + (_i+1), _result.steps);
+            //$("#my").jexcel("setValue", "D" + (_i+1), _result.relative);
+            //$("#my").jexcel("setValue", "E" + (_i+1), _result.similarity);
+        }
+        $("#my").jexcel("setData", _data);
+        _callback();
+        
+        //$("#my").jexcel("setValue");
+        //$("#my").jexcel("setValue", "A1", "DDD");
+    }, 0);
+}
+            
+data = [
+    ["AABBCCAAABBC", "BBAACCCCAABB", null, null, null],
+    ["國軍程式不敵iPhone 禁止入營", "國軍鎖不住iPhone照相傳輸功能？科技界不解", null, null, null],
+    ["國軍程式不敵iPhone 禁止入營", "iPhone鎖功能APP早出現 科技界不解：為什麼國軍做不到？", null, null, null],
+    ["test", "tests", null, null, null],
+    ["test", "stest", null, null, null],
+    ["test", "mytest", null, null, null],
+    ["test", "mycrazytest", null, null, null],
+    ["test", "mytestiscrazy", null, null, null],
+    ["test", "teest", null, null, null],
+    ["test", "teeest", null, null, null],
+    ["test", "tst", null, null, null],
+    ["test", "tset", null, null, null],
+    ["test", "tsets", null, null, null],
+];
+
+var lock = false;
+
+var _jexcel = $('#my').jexcel({
+    data: data,
+    colHeaders: ["Text 1","Text 2","Steps","Relative","Similarity"],
+    colWidths: [300, 300, 50,50,50],
+    //wordWrap: true,
+    colAlignments: ["left", "left", "right", "right", "right"],
+    allowInsertColumn: false,
+    allowDeleteColumn: false,
+    columns: [
+        { type: 'text', wordWrap:true, },
+        { type: 'text', wordWrap:true },
+        { type: 'numeric', readOnly:true },
+        { type: 'numeric', readOnly:true },
+        { type: 'numeric', readOnly:true },
+    ],
+    onload: function () {
+        if (lock === true) {
+            return;
+        }
+        lock = true;
+        _change(function () {
+            lock = false;
+        })
+    },
+    onbeforechange: function () {
+        if (lock === true) {
+            return;
+        }
+        lock = true;
+        _change(function () {
+            lock = false;
+        })
+    },
+});
+
+
+        </script>
+        <style>
+            #my table td:not(.jexcel_label),
+            #my table td * {
+                vertical-align: top;
+                white-space: pre-wrap !important;
+                word-break: break-all;
+            }
+            
+            #my table td#col-0,
+            #my table td.c0,
+            #my table td#col-1,
+            #my table td.c1 { 
+                width: calc(35vw - 2.1rem) !important;
+            }
+            
+            #my table td#col-2,
+            #my table td.c2,
+            #my table td#col-3,
+            #my table td.c3,
+            #my table td#col-4,
+            #my table td.c4 { 
+                width: 10vw !important;
+            }
+        </style>
     </body>
 </html>
