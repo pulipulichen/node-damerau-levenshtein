@@ -1,17 +1,83 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>node-damerau-levenshtein test</title>
+        <title>node-damerau-levenshtein demo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="img/icon.png" />
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
     </head>
     <body>
+        <h1 class="ui header">
+            node-damerau-levenshtein demo
+        </h1>
+        <div id="app" class="ui form">
+            <div class="ui two column grid container">
+                <div class="column">
+                    <textarea class="text1" v-model="text1" v-on:change="levenshtien"></textarea>
+                </div>
+                <div class="column">
+                    <textarea class="text1" v-model="text2" v-on:change="levenshtien"></textarea>
+                </div>
+            </div>
+            <table class="ui table">
+  <thead>
+    <tr><th>Metric</th>
+    <th>Result</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>Steps</td>
+      <td>
+        {{ steps }}
+      </td>
+    </tr>
+    <tr>
+      <td>Relative</td>
+      <td>
+        {{ relative }}
+      </td>
+    </tr>
+    <tr>
+      <td>Similarity</td>
+      <td>
+        {{ similarity }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
         <script src="node-damerau-levenshtein.js"></script>
         <script>
+            var app_data = {
+  el: '#app',
+  data: {
+      text1: "國軍程式不敵iPhone 禁止入營",
+      text2: "國軍鎖不住iPhone照相傳輸功能？科技界不解",
+      steps: null,
+      relative: null,
+      similarity: null
+  },
+  methods: {
+      levenshtien: function () {
+          console.log([app_data.data.text1, app_data.data.text2]);
+          var _result = levenshtien(app_data.data.text1, app_data.data.text2);
+           console.log(_result);
+           for (var _i in _result) {
+               app_data.data[_i] = _result[_i];
+           }
+        }
+  }
+};
+var app = new Vue(app_data)
+app_data.methods.levenshtien();        
             //var levenshtien = require("index");
-            console.log(levenshtien("test", "test"));
+            console.log(levenshtien("AABBCCAAABBC", "BBAACCCCAABB"));
             console.log(levenshtien("國軍程式不敵iPhone 禁止入營", "國軍鎖不住iPhone照相傳輸功能？科技界不解"));
-            console.log(levenshtien("國軍程式不敵iPhone 禁止入營", "國軍鎖不住iPhone照相傳輸功能"));
+            //console.log(levenshtien("國軍程式不敵iPhone 禁止入營", "國軍鎖不住iPhone照相傳輸功能"));
             console.log(levenshtien("國軍程式不敵iPhone 禁止入營", "iPhone鎖功能APP早出現 科技界不解：為什麼國軍做不到？"));
             console.log(levenshtien("test", "tests"));
             console.log(levenshtien("test", "stest"));
