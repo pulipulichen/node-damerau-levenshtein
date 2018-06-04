@@ -15,6 +15,30 @@
                 node-damerau-levenshtein demo
             </h1>
             <div id="app" class="ui form">
+                <div class="field">
+            <label>Example</label>
+            <select class="ui fluid dropdown" v-model="example" v-on:change="parse_example">
+                <option value="國軍程式不敵iPhone 禁止入營 / 國軍鎖不住iPhone照相傳輸功能？科技界不解">國軍程式不敵iPhone 禁止入營 / 國軍鎖不住iPhone照相傳輸功能？科技界不解</option>
+                <option value="國軍程式不敵iPhone 禁止入營 / iPhone鎖功能APP早出現 科技界不解：為什麼國軍做不到？">國軍程式不敵iPhone 禁止入營 / iPhone鎖功能APP早出現 科技界不解：為什麼國軍做不到？</option>
+                <option value="test / test">test / test</option>
+                <option value="test / tests">test / tests</option>
+                <option value="test / mytest">test / mytest</option>
+                <option value="test / mycrazytest">test / mycrazytest</option>
+                <option value="test / mytestiscrazy">test / mytestiscrazy</option>
+                <option value="test / teest">test / teest</option>
+                <option value="test / teeest">test / teeest</option>
+                <option value="test / tst">test / tst</option>
+                <option value="test / tset">test / tset</option>
+                <option value="test / tsets">test / tsets</option>
+                <option value="test / tsset">test / tsset</option>
+                <option value="banana / banaan">banana / banaan</option>
+                <option value="banana / nabana">banana / nabana</option>
+                <option value="banana / nabana">banana / abnaan</option>
+                <option value=" / "> / </option>
+                <option value="test / ">test / </option>
+                <option value=" / test"> / test</option>
+            </select>
+                      </div>
                 <div class="ui two column grid container">
                     <div class="column">
                         <textarea class="text1" v-model="text1" v-on:change="levenshtien"></textarea>
@@ -61,16 +85,23 @@ var app_data = {
         text2: "國軍鎖不住iPhone照相傳輸功能？科技界不解",
         steps: null,
         relative: null,
-        similarity: null
+        similarity: null,
+        example: "國軍程式不敵iPhone 禁止入營 / 國軍鎖不住iPhone照相傳輸功能？科技界不解"
     },
     methods: {
         levenshtien: function () {
-            console.log([app_data.data.text1, app_data.data.text2]);
+            //console.log([app_data.data.text1, app_data.data.text2]);
             var _result = levenshtien(app_data.data.text1, app_data.data.text2);
-            console.log(_result);
+            //console.log(_result);
             for (var _i in _result) {
                 app_data.data[_i] = _result[_i];
             }
+        },
+        parse_example: function () {
+            var _example_parts = app_data.data.example.split(" / ");
+            app_data.data.text1 = _example_parts[0].trim();
+            app_data.data.text2 = _example_parts[1].trim();
+            app_data.methods.levenshtien();
         }
     }
 };
